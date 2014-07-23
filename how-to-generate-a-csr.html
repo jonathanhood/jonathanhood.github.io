@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="">	
+<head>
+	<meta charset="utf-8"/>
+	<title>How-to Generate a CSR - jonathanhood.org</title>	
+	<meta name="author" content="jonathan">
+	
+
+	<meta name="description" content="I recently found myself in need of a csr for work project, and found the documentation a bit lacking. Here is how I accomplished that task. I'm going to make the following assumptions: You are using Debian 5.0 Lenny You have apache2 installed, and SSL configured with a ...">
+
+
+	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
+	<link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+		
+
+</head>
+	
+<body>
+
+    <div class="container">
+	  
+	  <header role="banner">
+	      <nav class="pages">
+			  <a href="./pages/about-me.html">About Me</a>
+	      </nav>
+		<a href="." class="title">jonathanhood.org</a>
+      </header>
+	
+	  <div class="wrapper">
+
+		  <div role="main" class="content">
+	<article class="full">
+			
+		<h1>How-to Generate a CSR</h1>
+		
+<div class="metadata">
+  <time datetime="2011-01-30T00:00:00" pubdate>Sun 30 January 2011</time>
+  in <a href="./category/notes.html">Notes</a>
+</div>		
+		<p>I recently found myself in need of a csr for work project, and found the documentation a bit lacking.  Here is how I accomplished that task.  I'm going to make the following assumptions:</p>
+<ul class="simple">
+<li>You are using Debian 5.0 Lenny</li>
+<li>You have apache2 installed, and SSL configured with a self-signed certificate.</li>
+</ul>
+<p>A CSR is the request you send to a CA for a signed certificate. Generating one is straight forward, first we have to generate a private key:</p>
+<pre class="literal-block">
+&gt; cd /etc/ssl/private
+&gt; openssl genrsa -out private.key 2048
+&gt; chmod 600 private.key
+</pre>
+<p>Now that we have generated a private key, we can generate the CSR. It is going to ask a bunch of questions, answer with the same values used whenever you created the account with your CA:</p>
+<pre class="literal-block">
+&gt; openssl req -new -key private.key -out request.csr
+</pre>
+<p>Give that CSR to the CA, and they will generate you an SSL certificate. I'll cover giving that certificate to apache in a later article.</p>
+	
+
+	</article>
+
+
+		  </div>	
+		  
+		  <div class="sidebar">
+
+	        <nav>
+	          <h2>Categories</h2>
+	          <ul>
+	              <li class="active"><a href="./category/notes.html">Notes</a></li>
+	              <li ><a href="./category/projects.html">Projects</a></li>
+	              <li ><a href="./category/tools.html">Tools</a></li>
+	          </ul>
+	        </nav>
+
+	          <aside>
+	          <h2>Social</h2>
+			    <ul class="social">
+				  <li><a href="https://github.com/jonathanhood">Github</a><i></i></li>
+				  <li><a href="http://www.linkedin.com/in/jonathanhood2">LinkedIn</a><i></i></li>
+			    </ul>
+			  </aside>
+
+
+		  </div>
+
+	  </div>
+
+      <footer>
+		<p role="contentinfo">
+		  © 2013 jonathan - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
+    	</p>
+
+	  </footer>	
+
+	</div>
+	
+
+</body>
+</html>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>jonathanhood.org</title><link href="/" rel="alternate"></link><link href="/feeds/jonathan.atom.xml" rel="self"></link><id>/</id><updated>2012-07-02T00:00:00+02:00</updated><entry><title>EasyDNS With Python</title><link href="/easydns-with-python.html" rel="alternate"></link><updated>2012-07-02T00:00:00+02:00</updated><author><name>jonathan</name></author><id>tag:,2012-07-02:easydns-with-python.html</id><summary type="html">&lt;p&gt;I recently needed a simple dynamic DNS updater for the EasyDNS dns service. There was a linux client available, but it was written in C and required quite a bit of work to get working. So, I wrote a simple python library to do the job.&lt;/p&gt;
+&lt;p&gt;&lt;a class="reference external" href="/static/easyDnsUpdate.py"&gt;[Download]&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Features&lt;/strong&gt;&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Retrieve your publicly available IP address using the service at icanhazip.com&lt;/li&gt;
+&lt;li&gt;Update a domain in the EasyDNS service with the ip address of the current system.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Requirements&lt;/strong&gt;&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Python 2.6.x, Python 2.7.x&lt;/li&gt;
+&lt;li&gt;This &lt;em&gt;will not work&lt;/em&gt; in Python 3.x&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;ddns&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;ddns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getPublicIPAddr&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;ddns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;username&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;ddns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;password&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;ddns&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;updateEasyDNS&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;my.domain.com&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</summary></entry><entry><title>Map Generator</title><link href="/map-generator.html" rel="alternate"></link><updated>2011-02-01T00:00:00+01:00</updated><author><name>jonathan</name></author><id>tag:,2011-02-01:map-generator.html</id><summary type="html">&lt;p&gt;After playing &lt;a class="reference external" href="http://www.minecraft.net/"&gt;Minecraft&lt;/a&gt; for awhile I got interested in procedural terrain generation. I wondered how a world could just be 'generated' while playing a game. So, like all good problems, I wrote a small program to solve it. In my research I can across the &lt;a class="reference external" href="http://en.wikipedia.org/wiki/Diamond-square_algorithm"&gt;Diamond-Square algorithm&lt;/a&gt; and made an implementation of it. The output looks like this:&lt;/p&gt;
+&lt;img alt="Map Generator Image" class="align-center" src="/images/mapgen.jpg" style="width: 500px;" /&gt;
+&lt;p&gt;Here, if this image where to be interpreted as a height map, the blacker areas represent higher elevation and the white areas represent lower elevations. Using this data, a map can be generated.&lt;/p&gt;
+&lt;p&gt;If you want to try it out for yourself, &lt;a class="reference external" href="/static/mapgenerator.py"&gt;download&lt;/a&gt; my implementation. It requires the &lt;a class="reference external" href="http://code.google.com/p/pypng/"&gt;pypng&lt;/a&gt; library to visualize its output. It has been tested on python 2.6.&lt;/p&gt;
+</summary></entry><entry><title>Virtual Email Domains with Postfix and Courier</title><link href="/virtual-email-with-postfix-courier.html" rel="alternate"></link><updated>2011-02-01T00:00:00+01:00</updated><author><name>jonathan</name></author><id>tag:,2011-02-01:virtual-email-with-postfix-courier.html</id><summary type="html">&lt;p&gt;I've recently had to setup postfix and courier on a server that hosts multiple domains. Setting up the two for this task isn't hard, but proper documentation and tutorials can be hard to come by. We won't be using any extra services like MySQL to store the users and mailbox mappings. It works great for a small number of domains. I'm going to assume that Postfix and Courier are already set up and work for email addresses at your server's hostname. This how-to was tested on Debian Lenny. For our example, we will be creating the &lt;a class="reference external" href="mailto:mail&amp;#64;foobar.org"&gt;mail&amp;#64;foobar.org&lt;/a&gt; email address.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; pico /etc/postfix/main.cf
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;There, you are going to add a few configuration keys to the end of the file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;virtual_mailbox_domains = foobar.org
+virtual_mailbox_base = /var/mail
+virtual_mailbox_maps = hash:/etc/postfix/vmail
+virtual_uid_maps = static:6000
+virtual_gid_maps = static:6000
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, lets create the /etc/postfix/vmail file. This is where we will list the mailboxes and their directory to be stored&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; pico /etc/postfix/vmail
+#Insert these values
+mail@foobar.org          /var/mail/foobar.org/mail/
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, we need to create a user for postfix to use to put the mail into each mailbox&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; groupadd -g 6000 vmail
+&amp;gt; useradd -g vmail -u 6000
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, create the mailbox directory and give permission to vmail.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; mkdir -p /var/mail/foobar.org
+&amp;gt; chown vmail:vmail -R /var/mail
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, create the hash of our vmail mapping file. This has to be done every time you adjust the /etc/postfix/vmail file. Then, we'll reload postfix and let it run the new config.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; postmap /etc/postfix/vmail
+&amp;gt; postfix reload
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ok, postfix is set up. Now, lets setup courier. For courier, we will be using the userdb auth package for authentication. For that to work, we need to give it a list of users with their mail directory. Then we will assign a password to each user. The first step is to update the authdaemonrc configuration.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; pico /etc/courier/authdaemonrc
+#Change this key
+authmodulelist=&amp;quot;authpam&amp;quot;
+#to
+authmodulelist=&amp;quot;authpam authuserdb&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, lets create the mail user in userdb. Whenever we create a user, we need to set uid=6000 and gid=6000 since this is the id of the vmail user used by postfix. The other variables point to the mailbox directory created by postfix.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; userdb mail@foobar.org set uid=6000 gid=6000 home=/var/mail/foobar.org/mail \
+  mail=/var/mail/foobar.org/mail
+&amp;gt; userdbpw -md5 | userdb mail@foobar.org set systempw
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Every time we change userdb, we have to update it. To do so:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; makeuserdb
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, just reload authdaemonrc.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&amp;gt; /etc/init.d/authdaemonrc reload
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That should do it. Try logging in to the new email address. Note that you must use the full email address as the username.&lt;/p&gt;
+&lt;p&gt;Credit to &lt;a class="reference external" href="http://dannorth.net/2007/09/09/virtual-mailboxes-with-courier-imap-and-postfix"&gt;dannorth.net&lt;/a&gt; for a lot of this information. In many cases these steps are verbatim, but some of them had to be corrected (hence the motivation for this page).&lt;/p&gt;
+</summary></entry><entry><title>How-To Send Email with Python</title><link href="/email-with-python.html" rel="alternate"></link><updated>2011-01-30T00:00:00+01:00</updated><author><name>jonathan</name></author><id>tag:,2011-01-30:email-with-python.html</id><summary type="html">&lt;p&gt;Sending email from a script is a very useful tool. On a linux machine, you can setup a mta to get mail from any cron jobs, but there are alot of situations where that functionality may not be available. This happened to me the other day, and I found the fantastic smtplib that exists in the python standard library. So, you need to send a message? Its super easy, first import smtplib and connect to a server&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;smtplib&lt;/span&gt;
+&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;smtplib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SMTP&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;your.smtp.address&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;At this point there may or may not be a few extra steps to perform. My test server is configured for STARTTLS and authentication. I'll detail the steps for that here.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;starttls&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ehlo&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;login&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;username&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;password&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, build your message. The primary downside to smtplib is that you have to build the header yourself. As it turns out, that is pretty trivial.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;mailto&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;test.email@foo.com&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;mailfrom&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;otheremail@foo.com&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;subject&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Test Email&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;From: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;mailfrom&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\r\n&lt;/span&gt;&lt;span class="s"&gt;To: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;mailto&lt;/span&gt;
+     &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\r\n&lt;/span&gt;&lt;span class="s"&gt;Subject: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;subject&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\r\n\r\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The rest of the message is just plain text.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;body&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Hello world!&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, put the two together and send the message.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;msg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;body&lt;/span&gt;
+&lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sendmail&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;mailfrom&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mailto&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;msg&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I wrote a function to encapsulate this behavior, maybe it will be useful for you.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;sendEmail&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;mailfrom&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mailto&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;body&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;servername&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt; &lt;span class="p"&gt;):&lt;/span&gt;
+  &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;smtplib&lt;/span&gt;
+  &lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;smtplib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SMTP&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;servername&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;starttls&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ehlo&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;login&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;msg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;From: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;mailfrom&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\r\n&lt;/span&gt;&lt;span class="s"&gt;To: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;mailto&lt;/span&gt;
+        &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\r\n&lt;/span&gt;&lt;span class="s"&gt;Subject: &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;subject&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\r\n\r\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;body&lt;/span&gt;
+  &lt;span class="n"&gt;server&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sendmail&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;mailfrom&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;mailto&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;msg&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</summary></entry><entry><title>Fixing arrow keys in vim</title><link href="/fixing-vim-arrow-keys.html" rel="alternate"></link><updated>2011-01-30T00:00:00+01:00</updated><author><name>jonathan</name></author><id>tag:,2011-01-30:fixing-vim-arrow-keys.html</id><summary type="html">&lt;p&gt;Vim is an amazing text editor that many people swear by. On occasion though, it does do some frustrating stuff. For example, ever have vim do weird things whenever you press an error key? Happens to me pretty often, and I always have to scour the internet for a solution. It typically happens to me in two cases:&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Using vim on a laptop&lt;/li&gt;
+&lt;li&gt;Using vim inside of putty&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Never fear, there is a fix! Edit your .vimrc file&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;gt; pico ~/.vimrc
+&lt;/pre&gt;
+&lt;p&gt;Insert the following lines&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+set t_ku=^[OA
+set t_kd=^[OB
+set t_kr=^[OC
+set t_kl=^[OD
+&lt;/pre&gt;
+&lt;p&gt;Now, try out your arrow keys in vim. They should work. If not, there are more solutions at the vim wikia. Maybe you'll find something that will work for you there.&lt;/p&gt;
+</summary></entry><entry><title>How-to Generate a CSR</title><link href="/how-to-generate-a-csr.html" rel="alternate"></link><updated>2011-01-30T00:00:00+01:00</updated><author><name>jonathan</name></author><id>tag:,2011-01-30:how-to-generate-a-csr.html</id><summary type="html">&lt;p&gt;I recently found myself in need of a csr for work project, and found the documentation a bit lacking.  Here is how I accomplished that task.  I'm going to make the following assumptions:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;You are using Debian 5.0 Lenny&lt;/li&gt;
+&lt;li&gt;You have apache2 installed, and SSL configured with a self-signed certificate.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A CSR is the request you send to a CA for a signed certificate. Generating one is straight forward, first we have to generate a private key:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;gt; cd /etc/ssl/private
+&amp;gt; openssl genrsa -out private.key 2048
+&amp;gt; chmod 600 private.key
+&lt;/pre&gt;
+&lt;p&gt;Now that we have generated a private key, we can generate the CSR. It is going to ask a bunch of questions, answer with the same values used whenever you created the account with your CA:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;gt; openssl req -new -key private.key -out request.csr
+&lt;/pre&gt;
+&lt;p&gt;Give that CSR to the CA, and they will generate you an SSL certificate. I'll cover giving that certificate to apache in a later article.&lt;/p&gt;
+</summary></entry><entry><title>Samba on Debian Lenny</title><link href="/samba-on-debian-lenny.html" rel="alternate"></link><updated>2011-01-30T00:00:00+01:00</updated><author><name>jonathan</name></author><id>tag:,2011-01-30:samba-on-debian-lenny.html</id><summary type="html">&lt;p&gt;I've recently had to install the most simple of SAMBA setups.  The following setup is meant for the simplest of environments, where no authentication is required.  It is completely open in that anyone can read/write to the share.  Be warned: only use this in a situation where you are sure it is safe.  For me, it is great for a development server share or for sharing files on a home network. First, either login as root, or switch user to the root account.  To switch user:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;gt; su -
+&lt;/pre&gt;
+&lt;p&gt;Now, install samba:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;gt;apt-get install samba
+&lt;/pre&gt;
+&lt;p&gt;Now, we need to edit the samba configuration file:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;gt;pico /etc/samba/smb.conf
+&lt;/pre&gt;
+&lt;p&gt;Look for the following key:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+#     security = user
+&lt;/pre&gt;
+&lt;p&gt;And set to:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+security = share
+&lt;/pre&gt;
+&lt;p&gt;Niow, at the end of the file, add this section:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+[SHARENAME]
+     comment = Share Description
+     path = /smb_share
+     guest ok = yes
+     browesable = yes
+     create mask = 0777
+     directory mask = 0777
+     force user = nobody
+     force group = nogroup
+     writeable = yes
+&lt;/pre&gt;
+&lt;p&gt;Create the directory we will be sharing:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;gt; mkdir /smb_share
+&lt;/pre&gt;
+&lt;p&gt;And set permissions:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;gt; chmod a+rw /smb_share
+&lt;/pre&gt;
+&lt;p&gt;Now, restart samba:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;gt; /etc/init.d/samba restart
+&lt;/pre&gt;
+&lt;p&gt;And your done, the share should be up and going.&lt;/p&gt;
+</summary></entry><entry><title>Signed SSL Cert on Debian Lenny</title><link href="/signed-ssl-certs-in-debian-lenny.html" rel="alternate"></link><updated>2011-01-30T00:00:00+01:00</updated><author><name>jonathan</name></author><id>tag:,2011-01-30:signed-ssl-certs-in-debian-lenny.html</id><summary type="html">&lt;p&gt;This is a follow up to the previous post, where I showed how-to generate a CSR. Now, I'm going to assume that you have a signed certificate and a CA bundle. Configuring apache to use these items is a relatively simple affair. First, copy them to the proper place on your server:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;gt; mv public.crt /etc/ssl/certs/public.crt
+&amp;gt; mkdir /etc/apache2/ssl.cert
+&amp;gt; mv bundle.ca-bundle /etc/apache2/ssl.cert/bundle.ca-bundle
+&lt;/pre&gt;
+&lt;p&gt;Now, configure apache to use these certificate files. You'll need to give apache 3 files.&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;Your private key.&lt;/li&gt;
+&lt;li&gt;The public certificate.&lt;/li&gt;
+&lt;li&gt;The CA bundle.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The 1st item was generated before you created the CSR, the second 2 are provided by your CA.  I'll assume that the default ssl configuration for apache is in use:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;gt; vim /etc/apache2/sites-enabled/default-ssl
+&lt;/pre&gt;
+&lt;p&gt;There, find the following keys and set them to the proper values:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+SSLCertificateFile /etc/ssl/certs/public.crt
+SSLCertificateKeyFile /etc/ssl/private/private.key
+SSLCACertificateFile /etc/apache2/ssl.cert/bundle.ca-bundle
+&lt;/pre&gt;
+&lt;p&gt;Now, just need to reload apache:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+&amp;gt; /etc/init.d/apache2 reload
+&lt;/pre&gt;
+&lt;p&gt;That should be it. You should now stop seeing certificate warnings whenever you visit an SSL page.&lt;/p&gt;
+</summary></entry><entry><title>PyPong</title><link href="/pypong.html" rel="alternate"></link><updated>2010-08-04T00:00:00+02:00</updated><author><name>jonathan</name></author><id>tag:,2010-08-04:pypong.html</id><summary type="html">&lt;p&gt;So, A few years ago I decided to learn how to write a video game.  My first game, of course, was pong.  It is implemented in python using the fantastic pygame library.&lt;/p&gt;
+&lt;img alt="" src="/images/pong.png" /&gt;
+&lt;p&gt;Feautres&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;AI controlled paddle to play with.&lt;/li&gt;
+&lt;li&gt;Ball keeps getting faster, this version of pong becomes difficult rapidly.&lt;/li&gt;
+&lt;li&gt;Win with 10.  Score 10 points and you win the game.  Just don't let the
+computer score 10 first.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Requirements&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Python 2.6.  It may work with later versions of python, but this is untested.&lt;/li&gt;
+&lt;li&gt;The pygame library.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To Play&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;First, make sure you have &lt;a class="reference external" href="http://www.python.org/download/releases/2.6.6/"&gt;Python 2.6&lt;/a&gt; installed.&lt;/li&gt;
+&lt;li&gt;Now, install the &lt;a class="reference external" href="http://www.pygame.org/download.shtml"&gt;pygame&lt;/a&gt; library.  Choose the version for your platform
+and for python 2.6.&lt;/li&gt;
+&lt;li&gt;Download the game.  Right click and select save as.
+&lt;a class="reference external" href="/static/pong.pyw"&gt;[download]&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Double click pong.pyw.  It should start right up.&lt;/li&gt;
+&lt;/ul&gt;
+</summary></entry><entry><title>RayTrace</title><link href="/raytrace.html" rel="alternate"></link><updated>2010-08-04T00:00:00+02:00</updated><author><name>jonathan</name></author><id>tag:,2010-08-04:raytrace.html</id><summary type="html">&lt;p&gt;A while ago, I was asked to create a ray tracer as a school project.  Since then, I have extended my implementation quite a bit.  It is still exceptionally limited, but it was a great learning tool.  It also makes a cool looking picture!&lt;/p&gt;
+&lt;img alt="" src="/images/raytracer.png" /&gt;
+&lt;p&gt;Features&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Up to 16x supersampling.&lt;/li&gt;
+&lt;li&gt;Reflection.&lt;/li&gt;
+&lt;li&gt;Multiple light sources.&lt;/li&gt;
+&lt;li&gt;Can trace the following primitives: Plane, Box, Sphere, and Cylinder.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Requirements&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;A Linux-based operating system.&lt;/li&gt;
+&lt;li&gt;The OpenGL Development Libraries.&lt;/li&gt;
+&lt;li&gt;The freeglut library.&lt;/li&gt;
+&lt;li&gt;The g++ compiler.&lt;/li&gt;
+&lt;li&gt;The source code. &lt;a class="reference external" href="/static/raytrace.tar.gz"&gt;[download]&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Compilation Instructions&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Install the libraries and software mentioned above.  The commands to install those libraries will vary from distro to distro.&lt;/li&gt;
+&lt;li&gt;Download the source code and extract it.&lt;/li&gt;
+&lt;li&gt;Open a terminal, cd to the directory you extracted to.&lt;/li&gt;
+&lt;li&gt;Compile with 'g++ -o raytrace -lglut -lGL -lGLU main.cpp'&lt;/li&gt;
+&lt;li&gt;Run with './raytrace'&lt;/li&gt;
+&lt;/ul&gt;
+</summary></entry></feed>

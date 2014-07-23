@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="">	
+<head>
+	<meta charset="utf-8"/>
+	<title>EasyDNS With Python - jonathanhood.org</title>	
+	<meta name="author" content="jonathan">
+	
+
+	<meta name="description" content="I recently needed a simple dynamic DNS updater for the EasyDNS dns service. There was a linux client available, but it was written in C and required quite a bit of work to get working. So, I wrote a simple python library to do the job. [Download] Features Retrieve your ...">
+
+
+	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
+	<link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+		
+
+</head>
+	
+<body>
+
+    <div class="container">
+	  
+	  <header role="banner">
+	      <nav class="pages">
+			  <a href="./pages/about-me.html">About Me</a>
+	      </nav>
+		<a href="." class="title">jonathanhood.org</a>
+      </header>
+	
+	  <div class="wrapper">
+
+		  <div role="main" class="content">
+	<article class="full">
+			
+		<h1>EasyDNS With Python</h1>
+		
+<div class="metadata">
+  <time datetime="2012-07-02T00:00:00" pubdate>Mon 02 July 2012</time>
+  in <a href="./category/tools.html">Tools</a>
+</div>		
+		<p>I recently needed a simple dynamic DNS updater for the EasyDNS dns service. There was a linux client available, but it was written in C and required quite a bit of work to get working. So, I wrote a simple python library to do the job.</p>
+<p><a class="reference external" href="./static/easyDnsUpdate.py">[Download]</a></p>
+<p><strong>Features</strong></p>
+<ul class="simple">
+<li>Retrieve your publicly available IP address using the service at icanhazip.com</li>
+<li>Update a domain in the EasyDNS service with the ip address of the current system.</li>
+</ul>
+<p><strong>Requirements</strong></p>
+<ul class="simple">
+<li>Python 2.6.x, Python 2.7.x</li>
+<li>This <em>will not work</em> in Python 3.x</li>
+</ul>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">ddns</span>
+<span class="k">print</span> <span class="n">ddns</span><span class="o">.</span><span class="n">getPublicIPAddr</span><span class="p">()</span>
+<span class="n">ddns</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="s">&#39;username&#39;</span>
+<span class="n">ddns</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s">&#39;password&#39;</span>
+<span class="n">ddns</span><span class="o">.</span><span class="n">updateEasyDNS</span><span class="p">(</span> <span class="s">&#39;my.domain.com&#39;</span> <span class="p">)</span>
+</pre></div>
+	
+
+	</article>
+
+
+		  </div>	
+		  
+		  <div class="sidebar">
+
+	        <nav>
+	          <h2>Categories</h2>
+	          <ul>
+	              <li ><a href="./category/notes.html">Notes</a></li>
+	              <li ><a href="./category/projects.html">Projects</a></li>
+	              <li class="active"><a href="./category/tools.html">Tools</a></li>
+	          </ul>
+	        </nav>
+
+	          <aside>
+	          <h2>Social</h2>
+			    <ul class="social">
+				  <li><a href="https://github.com/jonathanhood">Github</a><i></i></li>
+				  <li><a href="http://www.linkedin.com/in/jonathanhood2">LinkedIn</a><i></i></li>
+			    </ul>
+			  </aside>
+
+
+		  </div>
+
+	  </div>
+
+      <footer>
+		<p role="contentinfo">
+		  © 2013 jonathan - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
+    	</p>
+
+	  </footer>	
+
+	</div>
+	
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="">	
+<head>
+	<meta charset="utf-8"/>
+	<title>Signed SSL Cert on Debian Lenny - jonathanhood.org</title>	
+	<meta name="author" content="jonathan">
+	
+
+	<meta name="description" content="This is a follow up to the previous post, where I showed how-to generate a CSR. Now, I'm going to assume that you have a signed certificate and a CA bundle. Configuring apache to use these items is a relatively simple affair. First, copy them to the proper place ...">
+
+
+	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
+	<link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+		
+
+</head>
+	
+<body>
+
+    <div class="container">
+	  
+	  <header role="banner">
+	      <nav class="pages">
+			  <a href="./pages/about-me.html">About Me</a>
+	      </nav>
+		<a href="." class="title">jonathanhood.org</a>
+      </header>
+	
+	  <div class="wrapper">
+
+		  <div role="main" class="content">
+	<article class="full">
+			
+		<h1>Signed SSL Cert on Debian Lenny</h1>
+		
+<div class="metadata">
+  <time datetime="2011-01-30T00:00:00" pubdate>Sun 30 January 2011</time>
+  in <a href="./category/notes.html">Notes</a>
+</div>		
+		<p>This is a follow up to the previous post, where I showed how-to generate a CSR. Now, I'm going to assume that you have a signed certificate and a CA bundle. Configuring apache to use these items is a relatively simple affair. First, copy them to the proper place on your server:</p>
+<pre class="literal-block">
+&gt; mv public.crt /etc/ssl/certs/public.crt
+&gt; mkdir /etc/apache2/ssl.cert
+&gt; mv bundle.ca-bundle /etc/apache2/ssl.cert/bundle.ca-bundle
+</pre>
+<p>Now, configure apache to use these certificate files. You'll need to give apache 3 files.</p>
+<ol class="arabic simple">
+<li>Your private key.</li>
+<li>The public certificate.</li>
+<li>The CA bundle.</li>
+</ol>
+<p>The 1st item was generated before you created the CSR, the second 2 are provided by your CA.  I'll assume that the default ssl configuration for apache is in use:</p>
+<pre class="literal-block">
+&gt; vim /etc/apache2/sites-enabled/default-ssl
+</pre>
+<p>There, find the following keys and set them to the proper values:</p>
+<pre class="literal-block">
+SSLCertificateFile /etc/ssl/certs/public.crt
+SSLCertificateKeyFile /etc/ssl/private/private.key
+SSLCACertificateFile /etc/apache2/ssl.cert/bundle.ca-bundle
+</pre>
+<p>Now, just need to reload apache:</p>
+<pre class="literal-block">
+&gt; /etc/init.d/apache2 reload
+</pre>
+<p>That should be it. You should now stop seeing certificate warnings whenever you visit an SSL page.</p>
+	
+
+	</article>
+
+
+		  </div>	
+		  
+		  <div class="sidebar">
+
+	        <nav>
+	          <h2>Categories</h2>
+	          <ul>
+	              <li class="active"><a href="./category/notes.html">Notes</a></li>
+	              <li ><a href="./category/projects.html">Projects</a></li>
+	              <li ><a href="./category/tools.html">Tools</a></li>
+	          </ul>
+	        </nav>
+
+	          <aside>
+	          <h2>Social</h2>
+			    <ul class="social">
+				  <li><a href="https://github.com/jonathanhood">Github</a><i></i></li>
+				  <li><a href="http://www.linkedin.com/in/jonathanhood2">LinkedIn</a><i></i></li>
+			    </ul>
+			  </aside>
+
+
+		  </div>
+
+	  </div>
+
+      <footer>
+		<p role="contentinfo">
+		  © 2013 jonathan - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
+    	</p>
+
+	  </footer>	
+
+	</div>
+	
+
+</body>
+</html>

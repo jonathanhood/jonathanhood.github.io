@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="">	
+<head>
+	<meta charset="utf-8"/>
+	<title>How-To Send Email with Python - jonathanhood.org</title>	
+	<meta name="author" content="jonathan">
+	
+
+	<meta name="description" content="Sending email from a script is a very useful tool. On a linux machine, you can setup a mta to get mail from any cron jobs, but there are alot of situations where that functionality may not be available. This happened to me the other day, and I found the ...">
+
+
+	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
+	<link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+		
+
+</head>
+	
+<body>
+
+    <div class="container">
+	  
+	  <header role="banner">
+	      <nav class="pages">
+			  <a href="./pages/about-me.html">About Me</a>
+	      </nav>
+		<a href="." class="title">jonathanhood.org</a>
+      </header>
+	
+	  <div class="wrapper">
+
+		  <div role="main" class="content">
+	<article class="full">
+			
+		<h1>How-To Send Email with Python</h1>
+		
+<div class="metadata">
+  <time datetime="2011-01-30T00:00:00" pubdate>Sun 30 January 2011</time>
+  in <a href="./category/notes.html">Notes</a>
+</div>		
+		<p>Sending email from a script is a very useful tool. On a linux machine, you can setup a mta to get mail from any cron jobs, but there are alot of situations where that functionality may not be available. This happened to me the other day, and I found the fantastic smtplib that exists in the python standard library. So, you need to send a message? Its super easy, first import smtplib and connect to a server</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span> <span class="s">&quot;your.smtp.address&quot;</span> <span class="p">)</span>
+</pre></div>
+<p>At this point there may or may not be a few extra steps to perform. My test server is configured for STARTTLS and authentication. I'll detail the steps for that here.</p>
+<div class="highlight"><pre><span class="n">server</span><span class="o">.</span><span class="n">starttls</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">ehlo</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span> <span class="s">&quot;username&quot;</span><span class="p">,</span> <span class="s">&quot;password&quot;</span> <span class="p">)</span>
+</pre></div>
+<p>Now, build your message. The primary downside to smtplib is that you have to build the header yourself. As it turns out, that is pretty trivial.</p>
+<div class="highlight"><pre><span class="n">mailto</span> <span class="o">=</span> <span class="s">&quot;test.email@foo.com&quot;</span>
+<span class="n">mailfrom</span> <span class="o">=</span> <span class="s">&quot;otheremail@foo.com&quot;</span>
+<span class="n">subject</span> <span class="o">=</span> <span class="s">&quot;Test Email&quot;</span>
+<span class="n">head</span> <span class="o">=</span> <span class="s">&quot;From: &quot;</span> <span class="o">+</span> <span class="n">mailfrom</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">To: &quot;</span> <span class="o">+</span> <span class="n">mailto</span>
+     <span class="o">+</span> <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">Subject: &quot;</span> <span class="o">+</span> <span class="n">subject</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\r\n\r\n</span><span class="s">&quot;</span>
+</pre></div>
+<p>The rest of the message is just plain text.</p>
+<div class="highlight"><pre><span class="n">body</span> <span class="o">=</span> <span class="s">&quot;Hello world!&quot;</span>
+</pre></div>
+<p>Now, put the two together and send the message.</p>
+<div class="highlight"><pre><span class="n">msg</span> <span class="o">=</span> <span class="n">head</span> <span class="o">+</span> <span class="n">body</span>
+<span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span> <span class="n">mailfrom</span><span class="p">,</span> <span class="n">mailto</span><span class="p">,</span> <span class="n">msg</span> <span class="p">)</span>
+</pre></div>
+<p>I wrote a function to encapsulate this behavior, maybe it will be useful for you.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">sendEmail</span><span class="p">(</span> <span class="n">mailfrom</span><span class="p">,</span> <span class="n">mailto</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">servername</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span> <span class="p">):</span>
+  <span class="kn">import</span> <span class="nn">smtplib</span>
+  <span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span> <span class="n">servername</span> <span class="p">)</span>
+  <span class="n">server</span><span class="o">.</span><span class="n">starttls</span><span class="p">()</span>
+  <span class="n">server</span><span class="o">.</span><span class="n">ehlo</span><span class="p">()</span>
+  <span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span> <span class="p">)</span>
+  <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;From: &quot;</span> <span class="o">+</span> <span class="n">mailfrom</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">To: &quot;</span> <span class="o">+</span> <span class="n">mailto</span>
+        <span class="o">+</span> <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">Subject: &quot;</span> <span class="o">+</span> <span class="n">subject</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\r\n\r\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">body</span>
+  <span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span> <span class="n">mailfrom</span><span class="p">,</span> <span class="n">mailto</span><span class="p">,</span> <span class="n">msg</span> <span class="p">)</span>
+</pre></div>
+	
+
+	</article>
+
+
+		  </div>	
+		  
+		  <div class="sidebar">
+
+	        <nav>
+	          <h2>Categories</h2>
+	          <ul>
+	              <li class="active"><a href="./category/notes.html">Notes</a></li>
+	              <li ><a href="./category/projects.html">Projects</a></li>
+	              <li ><a href="./category/tools.html">Tools</a></li>
+	          </ul>
+	        </nav>
+
+	          <aside>
+	          <h2>Social</h2>
+			    <ul class="social">
+				  <li><a href="https://github.com/jonathanhood">Github</a><i></i></li>
+				  <li><a href="http://www.linkedin.com/in/jonathanhood2">LinkedIn</a><i></i></li>
+			    </ul>
+			  </aside>
+
+
+		  </div>
+
+	  </div>
+
+      <footer>
+		<p role="contentinfo">
+		  © 2013 jonathan - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
+    	</p>
+
+	  </footer>	
+
+	</div>
+	
+
+</body>
+</html>

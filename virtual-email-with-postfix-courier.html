@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="">	
+<head>
+	<meta charset="utf-8"/>
+	<title>Virtual Email Domains with Postfix and Courier - jonathanhood.org</title>	
+	<meta name="author" content="jonathan">
+	
+
+	<meta name="description" content="I've recently had to setup postfix and courier on a server that hosts multiple domains. Setting up the two for this task isn't hard, but proper documentation and tutorials can be hard to come by. We won't be using any extra services like MySQL to store the ...">
+
+
+	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
+	<link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+		
+
+</head>
+	
+<body>
+
+    <div class="container">
+	  
+	  <header role="banner">
+	      <nav class="pages">
+			  <a href="./pages/about-me.html">About Me</a>
+	      </nav>
+		<a href="." class="title">jonathanhood.org</a>
+      </header>
+	
+	  <div class="wrapper">
+
+		  <div role="main" class="content">
+	<article class="full">
+			
+		<h1>Virtual Email Domains with Postfix and Courier</h1>
+		
+<div class="metadata">
+  <time datetime="2011-02-01T00:00:00" pubdate>Tue 01 February 2011</time>
+  in <a href="./category/notes.html">Notes</a>
+</div>		
+		<p>I've recently had to setup postfix and courier on a server that hosts multiple domains. Setting up the two for this task isn't hard, but proper documentation and tutorials can be hard to come by. We won't be using any extra services like MySQL to store the users and mailbox mappings. It works great for a small number of domains. I'm going to assume that Postfix and Courier are already set up and work for email addresses at your server's hostname. This how-to was tested on Debian Lenny. For our example, we will be creating the <a class="reference external" href="mailto:mail&#64;foobar.org">mail&#64;foobar.org</a> email address.</p>
+<div class="highlight"><pre>&gt; pico /etc/postfix/main.cf
+</pre></div>
+<p>There, you are going to add a few configuration keys to the end of the file.</p>
+<div class="highlight"><pre>virtual_mailbox_domains = foobar.org
+virtual_mailbox_base = /var/mail
+virtual_mailbox_maps = hash:/etc/postfix/vmail
+virtual_uid_maps = static:6000
+virtual_gid_maps = static:6000
+</pre></div>
+<p>Now, lets create the /etc/postfix/vmail file. This is where we will list the mailboxes and their directory to be stored</p>
+<div class="highlight"><pre>&gt; pico /etc/postfix/vmail
+#Insert these values
+mail@foobar.org          /var/mail/foobar.org/mail/
+</pre></div>
+<p>Now, we need to create a user for postfix to use to put the mail into each mailbox</p>
+<div class="highlight"><pre>&gt; groupadd -g 6000 vmail
+&gt; useradd -g vmail -u 6000
+</pre></div>
+<p>Now, create the mailbox directory and give permission to vmail.</p>
+<div class="highlight"><pre>&gt; mkdir -p /var/mail/foobar.org
+&gt; chown vmail:vmail -R /var/mail
+</pre></div>
+<p>Now, create the hash of our vmail mapping file. This has to be done every time you adjust the /etc/postfix/vmail file. Then, we'll reload postfix and let it run the new config.</p>
+<div class="highlight"><pre>&gt; postmap /etc/postfix/vmail
+&gt; postfix reload
+</pre></div>
+<p>Ok, postfix is set up. Now, lets setup courier. For courier, we will be using the userdb auth package for authentication. For that to work, we need to give it a list of users with their mail directory. Then we will assign a password to each user. The first step is to update the authdaemonrc configuration.</p>
+<div class="highlight"><pre>&gt; pico /etc/courier/authdaemonrc
+#Change this key
+authmodulelist=&quot;authpam&quot;
+#to
+authmodulelist=&quot;authpam authuserdb&quot;
+</pre></div>
+<p>Now, lets create the mail user in userdb. Whenever we create a user, we need to set uid=6000 and gid=6000 since this is the id of the vmail user used by postfix. The other variables point to the mailbox directory created by postfix.</p>
+<div class="highlight"><pre>&gt; userdb mail@foobar.org set uid=6000 gid=6000 home=/var/mail/foobar.org/mail \
+  mail=/var/mail/foobar.org/mail
+&gt; userdbpw -md5 | userdb mail@foobar.org set systempw
+</pre></div>
+<p>Every time we change userdb, we have to update it. To do so:</p>
+<div class="highlight"><pre>&gt; makeuserdb
+</pre></div>
+<p>Now, just reload authdaemonrc.</p>
+<div class="highlight"><pre>&gt; /etc/init.d/authdaemonrc reload
+</pre></div>
+<p>That should do it. Try logging in to the new email address. Note that you must use the full email address as the username.</p>
+<p>Credit to <a class="reference external" href="http://dannorth.net/2007/09/09/virtual-mailboxes-with-courier-imap-and-postfix">dannorth.net</a> for a lot of this information. In many cases these steps are verbatim, but some of them had to be corrected (hence the motivation for this page).</p>
+	
+
+	</article>
+
+
+		  </div>	
+		  
+		  <div class="sidebar">
+
+	        <nav>
+	          <h2>Categories</h2>
+	          <ul>
+	              <li class="active"><a href="./category/notes.html">Notes</a></li>
+	              <li ><a href="./category/projects.html">Projects</a></li>
+	              <li ><a href="./category/tools.html">Tools</a></li>
+	          </ul>
+	        </nav>
+
+	          <aside>
+	          <h2>Social</h2>
+			    <ul class="social">
+				  <li><a href="https://github.com/jonathanhood">Github</a><i></i></li>
+				  <li><a href="http://www.linkedin.com/in/jonathanhood2">LinkedIn</a><i></i></li>
+			    </ul>
+			  </aside>
+
+
+		  </div>
+
+	  </div>
+
+      <footer>
+		<p role="contentinfo">
+		  © 2013 jonathan - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
+    	</p>
+
+	  </footer>	
+
+	</div>
+	
+
+</body>
+</html>
