@@ -13,6 +13,7 @@ regenerate this site::
   > cp -R output/* ../jonathanhood.github.io
   > cd ../jonathanhood.github.io
   > git add .
+  > git commit -m "Uploading Latest Content"
   > git push
   
 After about 10 minutes, jonathanhood.org will be updated with the latest content.
