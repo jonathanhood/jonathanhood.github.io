@@ -1,49 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="">	
 <head>
-          <title>jonathanhood.org</title>
-        <meta charset="utf-8" />
+	<meta charset="utf-8"/>
+	<title>Map Generator - jonathanhood.org</title>	
+	<meta name="author" content="jonathan">
+	
+
+	<meta name="description" content="After playing Minecraft for awhile I got interested in procedural terrain generation. I wondered how a world could just be 'generated' while playing a game. So, like all good problems, I wrote a small program to solve it. In my research I can across the Diamond-Square algorithm and made an ...">
 
 
-
+	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
+	<link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+		
 
 </head>
+	
+<body>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="./">jonathanhood.org <strong></strong></a></h1>
-        </header><!-- /#banner -->
-        <nav id="menu"><ul>
-            <li><a href="./pages/about-me.html">About Me</a></li>
-        </ul></nav><!-- /#menu -->
-<section id="content" class="body">
-  <header>
-    <h2 class="entry-title">
-      <a href="./map-generator.html" rel="bookmark"
-         title="Permalink to Map Generator">Map Generator</a></h2>
- 
-  </header>
-  <footer class="post-info">
-    <abbr class="published" title="2011-02-01T00:00:00">
-      Tue 01 February 2011
-    </abbr>
-    <address class="vcard author">
-      By           <a class="url fn" href="./author/jonathan.html">jonathan</a>
-    </address>
-  </footer><!-- /.post-info -->
-  <div class="entry-content">
-    <p>After playing <a class="reference external" href="http://www.minecraft.net/">Minecraft</a> for awhile I got interested in procedural terrain generation. I wondered how a world could just be 'generated' while playing a game. So, like all good problems, I wrote a small program to solve it. In my research I can across the <a class="reference external" href="http://en.wikipedia.org/wiki/Diamond-square_algorithm">Diamond-Square algorithm</a> and made an implementation of it. The output looks like this:</p>
+    <div class="container">
+	  
+	  <header role="banner">
+	      <nav class="pages">
+			  <a href="./pages/about-me.html">About Me</a>
+	      </nav>
+		<a href="." class="title">jonathanhood.org</a>
+      </header>
+	
+	  <div class="wrapper">
+
+		  <div role="main" class="content">
+	<article class="full">
+			
+		<h1>Map Generator</h1>
+		
+<div class="metadata">
+  <time datetime="2011-02-01T00:00:00" pubdate>Tue 01 February 2011</time>
+  in <a href="./category/projects.html">Projects</a>
+</div>		
+		<p>After playing <a class="reference external" href="http://www.minecraft.net/">Minecraft</a> for awhile I got interested in procedural terrain generation. I wondered how a world could just be 'generated' while playing a game. So, like all good problems, I wrote a small program to solve it. In my research I can across the <a class="reference external" href="http://en.wikipedia.org/wiki/Diamond-square_algorithm">Diamond-Square algorithm</a> and made an implementation of it. The output looks like this:</p>
 <img alt="Map Generator Image" class="align-center" src="./images/mapgen.jpg" style="width: 500px;" />
 <p>Here, if this image where to be interpreted as a height map, the blacker areas represent higher elevation and the white areas represent lower elevations. Using this data, a map can be generated.</p>
 <p>If you want to try it out for yourself, <a class="reference external" href="./static/mapgenerator.py">download</a> my implementation. It requires the <a class="reference external" href="http://code.google.com/p/pypng/">pypng</a> library to visualize its output. It has been tested on python 2.6.</p>
+	
 
-  </div><!-- /.entry-content -->
-</section>
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
+	</article>
+
+
+		  </div>	
+		  
+		  <div class="sidebar">
+
+	        <nav>
+	          <h2>Categories</h2>
+	          <ul>
+	              <li ><a href="./category/notes.html">Notes</a></li>
+	              <li class="active"><a href="./category/projects.html">Projects</a></li>
+	              <li ><a href="./category/tools.html">Tools</a></li>
+	          </ul>
+	        </nav>
+
+	          <aside>
+	          <h2>Social</h2>
+			    <ul class="social">
+				  <li><a href="https://github.com/jonathanhood">Github</a><i></i></li>
+				  <li><a href="http://www.linkedin.com/in/jonathanhood2">LinkedIn</a><i></i></li>
+			    </ul>
+			  </aside>
+
+
+		  </div>
+
+	  </div>
+
+      <footer>
+		<p role="contentinfo">
+		  © 2013 jonathan - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
+    	</p>
+
+	  </footer>	
+
+	</div>
+	
+
 </body>
 </html>

@@ -1,145 +1,257 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="">	
 <head>
-        <title>jonathanhood.org</title>
-        <meta charset="utf-8" />
+	<meta charset="utf-8"/>
+	<title>jonathanhood.org</title>	
+	<meta name="author" content="jonathan">
+	
+
+	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
+	<link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
+		
+
 </head>
+	
+<body>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="./">jonathanhood.org <strong></strong></a></h1>
-        </header><!-- /#banner -->
-        <nav id="menu"><ul>
-            <li><a href="./pages/about-me.html">About Me</a></li>
-        </ul></nav><!-- /#menu -->
-<section id="content">
-<h2>All articles</h2>
+    <div class="container">
+	  
+	  <header role="banner">
+	      <nav class="pages">
+			  <a href="./pages/about-me.html">About Me</a>
+	      </nav>
+		<a href="." class="title">jonathanhood.org</a>
+      </header>
+	
+	  <div class="wrapper">
 
-<ol id="post-list">
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="./easydns-with-python.html" rel="bookmark" title="Permalink to EasyDNS With Python">EasyDNS With Python</a></h2> </header>
-                <footer class="post-info">
-                    <abbr class="published" title="2012-07-02T00:00:00"> Mon 02 July 2012 </abbr>
-                    <address class="vcard author">By
-                        <a class="url fn" href="./author/jonathan.html">jonathan</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>I recently needed a simple dynamic DNS updater for the EasyDNS dns service. There was a linux client available, but it was written in C and required quite a bit of work to get working. So, I wrote a simple python library to do the job.</p>
+		  <div role="main" class="content">
+
+
+
+      <article>
+        <h1><a href="./easydns-with-python.html">EasyDNS With Python</a></h1>
+        <p>I recently needed a simple dynamic DNS updater for the EasyDNS dns service. There was a linux client available, but it was written in C and required quite a bit of work to get working. So, I wrote a simple python library to do the job.</p>
 <p><a class="reference external" href="./static/easyDnsUpdate.py">[Download]</a></p>
 <p><strong>Features</strong></p>
 <ul class="simple">
-<li>Retrieve your ...</li></ul> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="./map-generator.html" rel="bookmark" title="Permalink to Map Generator">Map Generator</a></h2> </header>
-                <footer class="post-info">
-                    <abbr class="published" title="2011-02-01T00:00:00"> Tue 01 February 2011 </abbr>
-                    <address class="vcard author">By
-                        <a class="url fn" href="./author/jonathan.html">jonathan</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>After playing <a class="reference external" href="http://www.minecraft.net/">Minecraft</a> for awhile I got interested in procedural terrain generation. I wondered how a world could just be 'generated' while playing a game. So, like all good problems, I wrote a small program to solve it. In my research I can across the <a class="reference external" href="http://en.wikipedia.org/wiki/Diamond-square_algorithm">Diamond-Square algorithm</a> and made an ...</p> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="./virtual-email-with-postfix-courier.html" rel="bookmark" title="Permalink to Virtual Email Domains with Postfix and Courier">Virtual Email Domains with Postfix and Courier</a></h2> </header>
-                <footer class="post-info">
-                    <abbr class="published" title="2011-02-01T00:00:00"> Tue 01 February 2011 </abbr>
-                    <address class="vcard author">By
-                        <a class="url fn" href="./author/jonathan.html">jonathan</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>I've recently had to setup postfix and courier on a server that hosts multiple domains. Setting up the two for this task isn't hard, but proper documentation and tutorials can be hard to come by. We won't be using any extra services like MySQL to store the ...</p> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="./email-with-python.html" rel="bookmark" title="Permalink to How-To Send Email with Python">How-To Send Email with Python</a></h2> </header>
-                <footer class="post-info">
-                    <abbr class="published" title="2011-01-30T00:00:00"> Sun 30 January 2011 </abbr>
-                    <address class="vcard author">By
-                        <a class="url fn" href="./author/jonathan.html">jonathan</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>Sending email from a script is a very useful tool. On a linux machine, you can setup a mta to get mail from any cron jobs, but there are alot of situations where that functionality may not be available. This happened to me the other day, and I found the ...</p> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="./fixing-vim-arrow-keys.html" rel="bookmark" title="Permalink to Fixing arrow keys in vim">Fixing arrow keys in vim</a></h2> </header>
-                <footer class="post-info">
-                    <abbr class="published" title="2011-01-30T00:00:00"> Sun 30 January 2011 </abbr>
-                    <address class="vcard author">By
-                        <a class="url fn" href="./author/jonathan.html">jonathan</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>Vim is an amazing text editor that many people swear by. On occasion though, it does do some frustrating stuff. For example, ever have vim do weird things whenever you press an error key? Happens to me pretty often, and I always have to scour the internet for a solution ...</p> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="./how-to-generate-a-csr.html" rel="bookmark" title="Permalink to How-to Generate a CSR">How-to Generate a CSR</a></h2> </header>
-                <footer class="post-info">
-                    <abbr class="published" title="2011-01-30T00:00:00"> Sun 30 January 2011 </abbr>
-                    <address class="vcard author">By
-                        <a class="url fn" href="./author/jonathan.html">jonathan</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>I recently found myself in need of a csr for work project, and found the documentation a bit lacking.  Here is how I accomplished that task.  I'm going to make the following assumptions:</p>
+<li>Retrieve your publicly available IP address using the service at icanhazip.com</li>
+<li>Update a domain in the EasyDNS service with the ip address of the current system.</li>
+</ul>
+<p><strong>Requirements</strong></p>
 <ul class="simple">
-<li>You are using Debian 5.0 Lenny</li>
-<li>You have apache2 installed, and SSL configured with a ...</li></ul> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="./samba-on-debian-lenny.html" rel="bookmark" title="Permalink to Samba on Debian Lenny">Samba on Debian Lenny</a></h2> </header>
-                <footer class="post-info">
-                    <abbr class="published" title="2011-01-30T00:00:00"> Sun 30 January 2011 </abbr>
-                    <address class="vcard author">By
-                        <a class="url fn" href="./author/jonathan.html">jonathan</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>I've recently had to install the most simple of SAMBA setups.  The following setup is meant for the simplest of environments, where no authentication is required.  It is completely open in that anyone can read/write to the share.  Be warned: only use this in a situation where you ...</p> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="./signed-ssl-certs-in-debian-lenny.html" rel="bookmark" title="Permalink to Signed SSL Cert on Debian Lenny">Signed SSL Cert on Debian Lenny</a></h2> </header>
-                <footer class="post-info">
-                    <abbr class="published" title="2011-01-30T00:00:00"> Sun 30 January 2011 </abbr>
-                    <address class="vcard author">By
-                        <a class="url fn" href="./author/jonathan.html">jonathan</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>This is a follow up to the previous post, where I showed how-to generate a CSR. Now, I'm going to assume that you have a signed certificate and a CA bundle. Configuring apache to use these items is a relatively simple affair. First, copy them to the proper place ...</p> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="./pypong.html" rel="bookmark" title="Permalink to PyPong">PyPong</a></h2> </header>
-                <footer class="post-info">
-                    <abbr class="published" title="2010-08-04T00:00:00"> Wed 04 August 2010 </abbr>
-                    <address class="vcard author">By
-                        <a class="url fn" href="./author/jonathan.html">jonathan</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>So, A few years ago I decided to learn how to write a video game.  My first game, of course, was pong.  It is implemented in python using the fantastic pygame library.</p>
-<img alt="" src="./images/pong.png" />
-<p>Feautres</p>
-<ul class="simple">
-<li>AI controlled paddle to play with.</li>
-<li>Ball keeps getting faster, this version of pong becomes difficult rapidly ...</li></ul> </div><!-- /.entry-content -->
-        </article></li>
-        <li><article class="hentry">
-                <header> <h2 class="entry-title"><a href="./raytrace.html" rel="bookmark" title="Permalink to RayTrace">RayTrace</a></h2> </header>
-                <footer class="post-info">
-                    <abbr class="published" title="2010-08-04T00:00:00"> Wed 04 August 2010 </abbr>
-                    <address class="vcard author">By
-                        <a class="url fn" href="./author/jonathan.html">jonathan</a>
-                    </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> <p>A while ago, I was asked to create a ray tracer as a school project.  Since then, I have extended my implementation quite a bit.  It is still exceptionally limited, but it was a great learning tool.  It also makes a cool looking picture!</p>
-<img alt="" src="./images/raytracer.png" />
-<p>Features</p>
-<ul class="simple">
-<li>Up to 16x supersampling.</li>
-<li>Reflection ...</li></ul> </div><!-- /.entry-content -->
-        </article></li>
-</ol><!-- /#posts-list -->
-</section><!-- /#content -->
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
-                which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
-        </footer><!-- /#contentinfo -->
+<li>Python 2.6.x, Python 2.7.x</li>
+<li>This <em>will not work</em> in Python 3.x</li>
+</ul>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">ddns</span>
+<span class="k">print</span> <span class="n">ddns</span><span class="o">.</span><span class="n">getPublicIPAddr</span><span class="p">()</span>
+<span class="n">ddns</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="s">&#39;username&#39;</span>
+<span class="n">ddns</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s">&#39;password&#39;</span>
+<span class="n">ddns</span><span class="o">.</span><span class="n">updateEasyDNS</span><span class="p">(</span> <span class="s">&#39;my.domain.com&#39;</span> <span class="p">)</span>
+</pre></div>
+
+      </article>
+
+      <hr />
+
+    
+
+
+
+      <article>
+        <h1><a href="./map-generator.html">Map Generator</a></h1>
+        <p>After playing <a class="reference external" href="http://www.minecraft.net/">Minecraft</a> for awhile I got interested in procedural terrain generation. I wondered how a world could just be 'generated' while playing a game. So, like all good problems, I wrote a small program to solve it. In my research I can across the <a class="reference external" href="http://en.wikipedia.org/wiki/Diamond-square_algorithm">Diamond-Square algorithm</a> and made an implementation of it. The output looks like this:</p>
+<img alt="Map Generator Image" class="align-center" src="./images/mapgen.jpg" style="width: 500px;" />
+<p>Here, if this image where to be interpreted as a height map, the blacker areas represent higher elevation and the white areas represent lower elevations. Using this data, a map can be generated.</p>
+<p>If you want to try it out for yourself, <a class="reference external" href="./static/mapgenerator.py">download</a> my implementation. It requires the <a class="reference external" href="http://code.google.com/p/pypng/">pypng</a> library to visualize its output. It has been tested on python 2.6.</p>
+
+      </article>
+
+      <hr />
+
+    
+
+
+
+      <article>
+        <h1><a href="./virtual-email-with-postfix-courier.html">Virtual Email Domains with Postfix and Courier</a></h1>
+        <p>I've recently had to setup postfix and courier on a server that hosts multiple domains. Setting up the two for this task isn't hard, but proper documentation and tutorials can be hard to come by. We won't be using any extra services like MySQL to store the users and mailbox mappings. It works great for a small number of domains. I'm going to assume that Postfix and Courier are already set up and work for email addresses at your server's hostname. This how-to was tested on Debian Lenny. For our example, we will be creating the <a class="reference external" href="mailto:mail&#64;foobar.org">mail&#64;foobar.org</a> email address.</p>
+<div class="highlight"><pre>&gt; pico /etc/postfix/main.cf
+</pre></div>
+<p>There, you are going to add a few configuration keys to the end of the file.</p>
+<div class="highlight"><pre>virtual_mailbox_domains = foobar.org
+virtual_mailbox_base = /var/mail
+virtual_mailbox_maps = hash:/etc/postfix/vmail
+virtual_uid_maps = static:6000
+virtual_gid_maps = static:6000
+</pre></div>
+<p>Now, lets create the /etc/postfix/vmail file. This is where we will list the mailboxes and their directory to be stored</p>
+<div class="highlight"><pre>&gt; pico /etc/postfix/vmail
+#Insert these values
+mail@foobar.org          /var/mail/foobar.org/mail/
+</pre></div>
+<p>Now, we need to create a user for postfix to use to put the mail into each mailbox</p>
+<div class="highlight"><pre>&gt; groupadd -g 6000 vmail
+&gt; useradd -g vmail -u 6000
+</pre></div>
+<p>Now, create the mailbox directory and give permission to vmail.</p>
+<div class="highlight"><pre>&gt; mkdir -p /var/mail/foobar.org
+&gt; chown vmail:vmail -R /var/mail
+</pre></div>
+<p>Now, create the hash of our vmail mapping file. This has to be done every time you adjust the /etc/postfix/vmail file. Then, we'll reload postfix and let it run the new config.</p>
+<div class="highlight"><pre>&gt; postmap /etc/postfix/vmail
+&gt; postfix reload
+</pre></div>
+<p>Ok, postfix is set up. Now, lets setup courier. For courier, we will be using the userdb auth package for authentication. For that to work, we need to give it a list of users with their mail directory. Then we will assign a password to each user. The first step is to update the authdaemonrc configuration.</p>
+<div class="highlight"><pre>&gt; pico /etc/courier/authdaemonrc
+#Change this key
+authmodulelist=&quot;authpam&quot;
+#to
+authmodulelist=&quot;authpam authuserdb&quot;
+</pre></div>
+<p>Now, lets create the mail user in userdb. Whenever we create a user, we need to set uid=6000 and gid=6000 since this is the id of the vmail user used by postfix. The other variables point to the mailbox directory created by postfix.</p>
+<div class="highlight"><pre>&gt; userdb mail@foobar.org set uid=6000 gid=6000 home=/var/mail/foobar.org/mail \
+  mail=/var/mail/foobar.org/mail
+&gt; userdbpw -md5 | userdb mail@foobar.org set systempw
+</pre></div>
+<p>Every time we change userdb, we have to update it. To do so:</p>
+<div class="highlight"><pre>&gt; makeuserdb
+</pre></div>
+<p>Now, just reload authdaemonrc.</p>
+<div class="highlight"><pre>&gt; /etc/init.d/authdaemonrc reload
+</pre></div>
+<p>That should do it. Try logging in to the new email address. Note that you must use the full email address as the username.</p>
+<p>Credit to <a class="reference external" href="http://dannorth.net/2007/09/09/virtual-mailboxes-with-courier-imap-and-postfix">dannorth.net</a> for a lot of this information. In many cases these steps are verbatim, but some of them had to be corrected (hence the motivation for this page).</p>
+
+      </article>
+
+      <hr />
+
+    
+
+
+
+      <article>
+        <h1><a href="./email-with-python.html">How-To Send Email with Python</a></h1>
+        <p>Sending email from a script is a very useful tool. On a linux machine, you can setup a mta to get mail from any cron jobs, but there are alot of situations where that functionality may not be available. This happened to me the other day, and I found the fantastic smtplib that exists in the python standard library. So, you need to send a message? Its super easy, first import smtplib and connect to a server</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span> <span class="s">&quot;your.smtp.address&quot;</span> <span class="p">)</span>
+</pre></div>
+<p>At this point there may or may not be a few extra steps to perform. My test server is configured for STARTTLS and authentication. I'll detail the steps for that here.</p>
+<div class="highlight"><pre><span class="n">server</span><span class="o">.</span><span class="n">starttls</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">ehlo</span><span class="p">()</span>
+<span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span> <span class="s">&quot;username&quot;</span><span class="p">,</span> <span class="s">&quot;password&quot;</span> <span class="p">)</span>
+</pre></div>
+<p>Now, build your message. The primary downside to smtplib is that you have to build the header yourself. As it turns out, that is pretty trivial.</p>
+<div class="highlight"><pre><span class="n">mailto</span> <span class="o">=</span> <span class="s">&quot;test.email@foo.com&quot;</span>
+<span class="n">mailfrom</span> <span class="o">=</span> <span class="s">&quot;otheremail@foo.com&quot;</span>
+<span class="n">subject</span> <span class="o">=</span> <span class="s">&quot;Test Email&quot;</span>
+<span class="n">head</span> <span class="o">=</span> <span class="s">&quot;From: &quot;</span> <span class="o">+</span> <span class="n">mailfrom</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">To: &quot;</span> <span class="o">+</span> <span class="n">mailto</span>
+     <span class="o">+</span> <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">Subject: &quot;</span> <span class="o">+</span> <span class="n">subject</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\r\n\r\n</span><span class="s">&quot;</span>
+</pre></div>
+<p>The rest of the message is just plain text.</p>
+<div class="highlight"><pre><span class="n">body</span> <span class="o">=</span> <span class="s">&quot;Hello world!&quot;</span>
+</pre></div>
+<p>Now, put the two together and send the message.</p>
+<div class="highlight"><pre><span class="n">msg</span> <span class="o">=</span> <span class="n">head</span> <span class="o">+</span> <span class="n">body</span>
+<span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span> <span class="n">mailfrom</span><span class="p">,</span> <span class="n">mailto</span><span class="p">,</span> <span class="n">msg</span> <span class="p">)</span>
+</pre></div>
+<p>I wrote a function to encapsulate this behavior, maybe it will be useful for you.</p>
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">sendEmail</span><span class="p">(</span> <span class="n">mailfrom</span><span class="p">,</span> <span class="n">mailto</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">servername</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span> <span class="p">):</span>
+  <span class="kn">import</span> <span class="nn">smtplib</span>
+  <span class="n">server</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span> <span class="n">servername</span> <span class="p">)</span>
+  <span class="n">server</span><span class="o">.</span><span class="n">starttls</span><span class="p">()</span>
+  <span class="n">server</span><span class="o">.</span><span class="n">ehlo</span><span class="p">()</span>
+  <span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span> <span class="p">)</span>
+  <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;From: &quot;</span> <span class="o">+</span> <span class="n">mailfrom</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">To: &quot;</span> <span class="o">+</span> <span class="n">mailto</span>
+        <span class="o">+</span> <span class="s">&quot;</span><span class="se">\r\n</span><span class="s">Subject: &quot;</span> <span class="o">+</span> <span class="n">subject</span> <span class="o">+</span> <span class="s">&quot;</span><span class="se">\r\n\r\n</span><span class="s">&quot;</span> <span class="o">+</span> <span class="n">body</span>
+  <span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span> <span class="n">mailfrom</span><span class="p">,</span> <span class="n">mailto</span><span class="p">,</span> <span class="n">msg</span> <span class="p">)</span>
+</pre></div>
+
+      </article>
+
+      <hr />
+
+        <div>
+          <h3>Last posts</h3>
+          <ol class="archive">
+    
+
+
+      <li>
+<a href="./fixing-vim-arrow-keys.html" rel="bookmark" title="Permalink to Fixing arrow keys in vim">Fixing arrow keys in vim</a>
+  <time datetime="2011-01-30T00:00:00" pubdate>Sun 30 January 2011</time>
+</a>      </li>
+
+
+      <li>
+<a href="./how-to-generate-a-csr.html" rel="bookmark" title="Permalink to How-to Generate a CSR">How-to Generate a CSR</a>
+  <time datetime="2011-01-30T00:00:00" pubdate>Sun 30 January 2011</time>
+</a>      </li>
+
+
+      <li>
+<a href="./samba-on-debian-lenny.html" rel="bookmark" title="Permalink to Samba on Debian Lenny">Samba on Debian Lenny</a>
+  <time datetime="2011-01-30T00:00:00" pubdate>Sun 30 January 2011</time>
+</a>      </li>
+
+
+      <li>
+<a href="./signed-ssl-certs-in-debian-lenny.html" rel="bookmark" title="Permalink to Signed SSL Cert on Debian Lenny">Signed SSL Cert on Debian Lenny</a>
+  <time datetime="2011-01-30T00:00:00" pubdate>Sun 30 January 2011</time>
+</a>      </li>
+
+
+      <li>
+<a href="./pypong.html" rel="bookmark" title="Permalink to PyPong">PyPong</a>
+  <time datetime="2010-08-04T00:00:00" pubdate>Wed 04 August 2010</time>
+</a>      </li>
+
+
+      <li>
+<a href="./raytrace.html" rel="bookmark" title="Permalink to RayTrace">RayTrace</a>
+  <time datetime="2010-08-04T00:00:00" pubdate>Wed 04 August 2010</time>
+</a>      </li>
+
+
+          </ol>
+        </div>
+
+		  </div>	
+		  
+		  <div class="sidebar">
+
+	        <nav>
+	          <h2>Categories</h2>
+	          <ul>
+	              <li ><a href="./category/notes.html">Notes</a></li>
+	              <li ><a href="./category/projects.html">Projects</a></li>
+	              <li ><a href="./category/tools.html">Tools</a></li>
+	          </ul>
+	        </nav>
+
+	          <aside>
+	          <h2>Social</h2>
+			    <ul class="social">
+				  <li><a href="https://github.com/jonathanhood">Github</a><i></i></li>
+				  <li><a href="http://www.linkedin.com/in/jonathanhood2">LinkedIn</a><i></i></li>
+			    </ul>
+			  </aside>
+
+
+		  </div>
+
+	  </div>
+
+      <footer>
+		<p role="contentinfo">
+		  © 2013 jonathan - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
+    	</p>
+
+	  </footer>	
+
+	</div>
+	
+
 </body>
 </html>
