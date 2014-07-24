@@ -1,43 +1,38 @@
-<!doctype html>
-<html lang="">	
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="utf-8"/>
-	<title>How-to Generate a CSR - jonathanhood.org</title>	
-	<meta name="author" content="jonathan">
-	
-
-	<meta name="description" content="I recently found myself in need of a csr for work project, and found the documentation a bit lacking. Here is how I accomplished that task. I'm going to make the following assumptions: You are using Debian 5.0 Lenny You have apache2 installed, and SSL configured with a ...">
+          <title>jonathanhood.org</title>
+        <meta charset="utf-8" />
 
 
-	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
-	<link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
-		
+
 
 </head>
-	
-<body>
 
-    <div class="container">
-	  
-	  <header role="banner">
-	      <nav class="pages">
-			  <a href="./pages/about-me.html">About Me</a>
-	      </nav>
-		<a href="." class="title">jonathanhood.org</a>
-      </header>
-	
-	  <div class="wrapper">
-
-		  <div role="main" class="content">
-	<article class="full">
-			
-		<h1>How-to Generate a CSR</h1>
-		
-<div class="metadata">
-  <time datetime="2011-01-30T00:00:00" pubdate>Sun 30 January 2011</time>
-  in <a href="./category/notes.html">Notes</a>
-</div>		
-		<p>I recently found myself in need of a csr for work project, and found the documentation a bit lacking.  Here is how I accomplished that task.  I'm going to make the following assumptions:</p>
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="./">jonathanhood.org <strong></strong></a></h1>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+            <li><a href="./pages/about-me.html">About Me</a></li>
+        </ul></nav><!-- /#menu -->
+<section id="content" class="body">
+  <header>
+    <h2 class="entry-title">
+      <a href="./how-to-generate-a-csr.html" rel="bookmark"
+         title="Permalink to How-to Generate a CSR">How-to Generate a CSR</a></h2>
+ 
+  </header>
+  <footer class="post-info">
+    <abbr class="published" title="2011-01-30T00:00:00">
+      Sun 30 January 2011
+    </abbr>
+    <address class="vcard author">
+      By           <a class="url fn" href="./author/jonathan.html">jonathan</a>
+    </address>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>I recently found myself in need of a csr for work project, and found the documentation a bit lacking.  Here is how I accomplished that task.  I'm going to make the following assumptions:</p>
 <ul class="simple">
 <li>You are using Debian 5.0 Lenny</li>
 <li>You have apache2 installed, and SSL configured with a self-signed certificate.</li>
@@ -53,46 +48,14 @@
 &gt; openssl req -new -key private.key -out request.csr
 </pre>
 <p>Give that CSR to the CA, and they will generate you an SSL certificate. I'll cover giving that certificate to apache in a later article.</p>
-	
 
-	</article>
-
-
-		  </div>	
-		  
-		  <div class="sidebar">
-
-	        <nav>
-	          <h2>Categories</h2>
-	          <ul>
-	              <li class="active"><a href="./category/notes.html">Notes</a></li>
-	              <li ><a href="./category/projects.html">Projects</a></li>
-	              <li ><a href="./category/tools.html">Tools</a></li>
-	          </ul>
-	        </nav>
-
-	          <aside>
-	          <h2>Social</h2>
-			    <ul class="social">
-				  <li><a href="https://github.com/jonathanhood">Github</a><i></i></li>
-				  <li><a href="http://www.linkedin.com/in/jonathanhood2">LinkedIn</a><i></i></li>
-			    </ul>
-			  </aside>
-
-
-		  </div>
-
-	  </div>
-
-      <footer>
-		<p role="contentinfo">
-		  © 2013 jonathan - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
-    	</p>
-
-	  </footer>	
-
-	</div>
-	
-
+  </div><!-- /.entry-content -->
+</section>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
 </body>
 </html>

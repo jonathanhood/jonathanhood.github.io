@@ -1,43 +1,38 @@
-<!doctype html>
-<html lang="">	
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="utf-8"/>
-	<title>Virtual Email Domains with Postfix and Courier - jonathanhood.org</title>	
-	<meta name="author" content="jonathan">
-	
-
-	<meta name="description" content="I've recently had to setup postfix and courier on a server that hosts multiple domains. Setting up the two for this task isn't hard, but proper documentation and tutorials can be hard to come by. We won't be using any extra services like MySQL to store the ...">
+          <title>jonathanhood.org</title>
+        <meta charset="utf-8" />
 
 
-	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
-	<link rel="stylesheet" href="./theme/css/main.css" type="text/css" />
-		
+
 
 </head>
-	
-<body>
 
-    <div class="container">
-	  
-	  <header role="banner">
-	      <nav class="pages">
-			  <a href="./pages/about-me.html">About Me</a>
-	      </nav>
-		<a href="." class="title">jonathanhood.org</a>
-      </header>
-	
-	  <div class="wrapper">
-
-		  <div role="main" class="content">
-	<article class="full">
-			
-		<h1>Virtual Email Domains with Postfix and Courier</h1>
-		
-<div class="metadata">
-  <time datetime="2011-02-01T00:00:00" pubdate>Tue 01 February 2011</time>
-  in <a href="./category/notes.html">Notes</a>
-</div>		
-		<p>I've recently had to setup postfix and courier on a server that hosts multiple domains. Setting up the two for this task isn't hard, but proper documentation and tutorials can be hard to come by. We won't be using any extra services like MySQL to store the users and mailbox mappings. It works great for a small number of domains. I'm going to assume that Postfix and Courier are already set up and work for email addresses at your server's hostname. This how-to was tested on Debian Lenny. For our example, we will be creating the <a class="reference external" href="mailto:mail&#64;foobar.org">mail&#64;foobar.org</a> email address.</p>
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="./">jonathanhood.org <strong></strong></a></h1>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+            <li><a href="./pages/about-me.html">About Me</a></li>
+        </ul></nav><!-- /#menu -->
+<section id="content" class="body">
+  <header>
+    <h2 class="entry-title">
+      <a href="./virtual-email-with-postfix-courier.html" rel="bookmark"
+         title="Permalink to Virtual Email Domains with Postfix and Courier">Virtual Email Domains with Postfix and Courier</a></h2>
+ 
+  </header>
+  <footer class="post-info">
+    <abbr class="published" title="2011-02-01T00:00:00">
+      Tue 01 February 2011
+    </abbr>
+    <address class="vcard author">
+      By           <a class="url fn" href="./author/jonathan.html">jonathan</a>
+    </address>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>I've recently had to setup postfix and courier on a server that hosts multiple domains. Setting up the two for this task isn't hard, but proper documentation and tutorials can be hard to come by. We won't be using any extra services like MySQL to store the users and mailbox mappings. It works great for a small number of domains. I'm going to assume that Postfix and Courier are already set up and work for email addresses at your server's hostname. This how-to was tested on Debian Lenny. For our example, we will be creating the <a class="reference external" href="mailto:mail&#64;foobar.org">mail&#64;foobar.org</a> email address.</p>
 <div class="highlight"><pre>&gt; pico /etc/postfix/main.cf
 </pre></div>
 <p>There, you are going to add a few configuration keys to the end of the file.</p>
@@ -84,46 +79,14 @@ authmodulelist=&quot;authpam authuserdb&quot;
 </pre></div>
 <p>That should do it. Try logging in to the new email address. Note that you must use the full email address as the username.</p>
 <p>Credit to <a class="reference external" href="http://dannorth.net/2007/09/09/virtual-mailboxes-with-courier-imap-and-postfix">dannorth.net</a> for a lot of this information. In many cases these steps are verbatim, but some of them had to be corrected (hence the motivation for this page).</p>
-	
 
-	</article>
-
-
-		  </div>	
-		  
-		  <div class="sidebar">
-
-	        <nav>
-	          <h2>Categories</h2>
-	          <ul>
-	              <li class="active"><a href="./category/notes.html">Notes</a></li>
-	              <li ><a href="./category/projects.html">Projects</a></li>
-	              <li ><a href="./category/tools.html">Tools</a></li>
-	          </ul>
-	        </nav>
-
-	          <aside>
-	          <h2>Social</h2>
-			    <ul class="social">
-				  <li><a href="https://github.com/jonathanhood">Github</a><i></i></li>
-				  <li><a href="http://www.linkedin.com/in/jonathanhood2">LinkedIn</a><i></i></li>
-			    </ul>
-			  </aside>
-
-
-		  </div>
-
-	  </div>
-
-      <footer>
-		<p role="contentinfo">
-		  © 2013 jonathan - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
-    	</p>
-
-	  </footer>	
-
-	</div>
-	
-
+  </div><!-- /.entry-content -->
+</section>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
 </body>
 </html>
