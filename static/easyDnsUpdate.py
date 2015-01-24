@@ -14,8 +14,8 @@ def getPublicIPAddr():
 	return ipstr
 
 def updateEasyDNS( domain ):
-	username = "jhood06"
-	password = "!blah!1337"
+	username = ""
+	password = ""
 	base64encode = base64.encodestring( '%s:%s' % (username, password)).replace( '\n', '' )
 
 	con = httplib.HTTPConnection( 'api.cp.easydns.com' )
